@@ -1,6 +1,6 @@
-package generators;
+package main.java.generators;
 
-import database.InsertionResult;
+import main.java.database.InsertionResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;

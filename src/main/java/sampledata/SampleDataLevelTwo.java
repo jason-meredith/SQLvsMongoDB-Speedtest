@@ -1,4 +1,4 @@
-package sampledata;
+package main.java.sampledata;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -59,7 +59,7 @@ public class SampleDataLevelTwo implements SampleData {
                 + String.valueOf(this.theta) + "); ";
 
         insertStatements.put("mysql", sqlStatement);
-        insertStatements.put("mongodb", "db." + tableName+ ".insert( { randomNumber: " + this.alpha + " } )");
+        insertStatements.put("mongodb", "db." + tableName+ ".insert");
 
         return insertStatements;
     }

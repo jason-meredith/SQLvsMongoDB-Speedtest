@@ -1,8 +1,8 @@
-package generators;
+package main.java.generators;
 
-import database.DatabaseConnector;
-import database.InsertionResult;
-import sampledata.SampleData;
+import main.java.database.DatabaseConnector;
+import main.java.database.InsertionResult;
+import main.java.sampledata.SampleData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,9 +66,9 @@ public class SampleDataGenerator implements SampleDataGeneratorInterface {
                     SampleData nextDataObject = SampleDataGenerator.this.sampleData.take();
 
                     // Iterate over each InsertionThread and add a clone to it's own Queue
-                    Iterator iterator = insertionThreads.entrySet().iterator();
+                    Iterator<?> iterator = insertionThreads.entrySet().iterator();
                     while (iterator.hasNext()) {
-                        Map.Entry pair = (Map.Entry)iterator.next();
+                        Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
 
                         ((InsertionThread) pair.getValue()).addSampleData(nextDataObject.getClone());
                     }
@@ -87,9 +87,9 @@ public class SampleDataGenerator implements SampleDataGeneratorInterface {
      * Iterates over each InsertionThread and starts them
      */
     public synchronized void start() {
-        Iterator iterator = insertionThreads.entrySet().iterator();
+        Iterator<?> iterator = insertionThreads.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry pair = (Map.Entry)iterator.next();
+            Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
             InsertionThread thread = ((InsertionThread) pair.getValue());
             threadPool.execute(thread);
             thread.start();
@@ -105,9 +105,9 @@ public class SampleDataGenerator implements SampleDataGeneratorInterface {
         HashMap<String, ArrayList<InsertionResult>> results = new HashMap<>();
 
         // Iterate over each InsertionThread
-        Iterator iterator = insertionThreads.entrySet().iterator();
+        Iterator<?> iterator = insertionThreads.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry pair = (Map.Entry)iterator.next();
+            Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
             String key = (String) pair.getKey();
             ArrayList<InsertionResult> value = ((InsertionThread) pair.getValue()).getResults();
 
@@ -122,9 +122,9 @@ public class SampleDataGenerator implements SampleDataGeneratorInterface {
      */
     public synchronized void stop() {
         // Iterate over all keys and call stop()
-        Iterator iterator = insertionThreads.entrySet().iterator();
+        Iterator<?> iterator = insertionThreads.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry pair = (Map.Entry)iterator.next();
+            Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
             ((InsertionThread) pair.getValue()).stop();
         }
     }
@@ -166,9 +166,9 @@ public class SampleDataGenerator implements SampleDataGeneratorInterface {
         SampleDataFactory.setComplexity(level);
         this.sampleData.clear();
 
-        Iterator iterator = insertionThreads.entrySet().iterator();
+        Iterator<?> iterator = insertionThreads.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry pair = (Map.Entry)iterator.next();
+            Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
             ((InsertionThread) pair.getValue()).clearQueuedSampleData();
         }
     }

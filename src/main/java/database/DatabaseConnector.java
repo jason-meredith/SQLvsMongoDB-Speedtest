@@ -1,9 +1,8 @@
-package database;
+package main.java.database;
 
-import sampledata.SampleData;
+import main.java.sampledata.SampleData;
 
 public interface DatabaseConnector {
-
 
     InsertionResult insert(SampleData data);
 

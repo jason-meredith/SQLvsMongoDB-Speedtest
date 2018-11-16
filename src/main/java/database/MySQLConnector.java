@@ -1,8 +1,8 @@
-package database;
-
-import sampledata.SampleData;
+package main.java.database;
 
 import java.util.Random;
+
+import main.java.sampledata.SampleData;
 
 /**
  * Used to connect to a MongoDB database, insert a SampleData object query and

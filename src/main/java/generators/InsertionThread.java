@@ -1,8 +1,8 @@
-package generators;
+package main.java.generators;
 
-import database.DatabaseConnector;
-import database.InsertionResult;
-import sampledata.SampleData;
+import main.java.database.DatabaseConnector;
+import main.java.database.InsertionResult;
+import main.java.sampledata.SampleData;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -76,7 +76,7 @@ public class InsertionThread implements Runnable {
      * Is this Insertion Thread running?
      * @return
      */
-    boolean isRunning() {
+    public boolean isRunning() {
         return running;
     }
 

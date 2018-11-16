@@ -1,4 +1,4 @@
-package sampledata;
+package main.java.sampledata;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -43,7 +43,7 @@ public class SampleDataLevelOne implements SampleData {
         HashMap<String, String> insertStatements = new HashMap<>();
 
         insertStatements.put("mysql", "INSERT INTO " + tableName + " VALUES(" + String.valueOf(this.randomNumber) + ");");
-        insertStatements.put("mongodb", "db." + tableName+ ".insert( { randomNumber: " + this.randomNumber + " } )");
+        insertStatements.put("mongodb", "db." + tableName+ ".insert");
 
         return insertStatements;
     }

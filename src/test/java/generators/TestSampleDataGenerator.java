@@ -1,22 +1,41 @@
-package generators;
+package test.java.generators;
 
-import database.InsertionResult;
-import database.MongoDBConnector;
-import database.MySQLConnector;
+import main.java.database.InsertionResult;
+import main.java.database.MongoDBConnector;
+import main.java.database.MySQLConnector;
+import main.java.generators.InsertionThread;
+import main.java.generators.SampleDataFactory;
+import main.java.generators.SampleDataGenerator;
+import main.java.sampledata.SampleDataLevelOne;
+import main.java.sampledata.SampleDataLevelTwo;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import sampledata.SampleDataLevelOne;
-import sampledata.SampleDataLevelTwo;
+import org.omg.CORBA.portable.UnknownException;
+
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
+
+import main.java.database.MongoDBConnector;
+import main.java.database.MySQLConnector;
+import main.java.sampledata.SampleDataLevelOne;
+import main.java.sampledata.SampleDataLevelTwo;
 
 public class TestSampleDataGenerator {
 
@@ -24,6 +43,14 @@ public class TestSampleDataGenerator {
 
     private static final String MYSQL = "mysql";
     private static final String MONGODB = "mongodb";
+	/** Create a MongoClient instance */
+	static MongoClient mongoClient = null;
+	/** Create a server name */
+	static String serverName = "localhost";
+	/** Create a server port */
+	static int serverPort = 27017;
+	/** Create mongoDB instance */
+	static MongoDatabase database = null;
 
     @BeforeClass
     public static void SetupFactory() {
@@ -37,12 +64,15 @@ public class TestSampleDataGenerator {
     @Before
     public void SetupGenerator() {
 
+    	// connect to MongoDB
+    	connectToMongo();
+    	
         // Create our generator
         generator = new SampleDataGenerator();
 
         // Add our InsertionThreads with their respective connectors
         generator.addInsertionThread(MYSQL, new MySQLConnector());
-        generator.addInsertionThread(MONGODB, new MongoDBConnector());
+        generator.addInsertionThread(MONGODB, new MongoDBConnector(database));
 
     }
 
@@ -53,9 +83,9 @@ public class TestSampleDataGenerator {
 
         // Make sure the threads are not running upon insertion
         boolean running = false;
-        Iterator iterator = insertionThreads.entrySet().iterator();
+        Iterator<?> iterator = insertionThreads.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry pair = (Map.Entry)iterator.next();
+            Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
             running = ((InsertionThread) pair.getValue()).isRunning();
         }
 
@@ -66,7 +96,7 @@ public class TestSampleDataGenerator {
 
         iterator = insertionThreads.entrySet().iterator();
         while (iterator.hasNext()) {
-            Map.Entry pair = (Map.Entry)iterator.next();
+            Map.Entry<?, ?> pair = (Map.Entry<?, ?>)iterator.next();
             running = ((InsertionThread) pair.getValue()).isRunning();
         }
 
@@ -146,5 +176,18 @@ public class TestSampleDataGenerator {
         assertEquals(generator.getResults().get(MYSQL).get(lastElement).getSampleData().getClass(), SampleDataLevelTwo.class);
 
     }
+    
+	static MongoDatabase connectToMongo() {
+		try {
+			mongoClient = new MongoClient();
+			// Create a database instance to get db
+			database = mongoClient.getDatabase("project");
+
+		} catch (UnknownException e) {
+			System.err.println("Error connecting to MongoDB Client.");
+			Logger.getLogger(Mongo.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return database;
+	}
 
 }

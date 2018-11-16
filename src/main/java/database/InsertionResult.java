@@ -1,6 +1,6 @@
-package database;
+package main.java.database;
 
-import sampledata.SampleData;
+import main.java.sampledata.SampleData;
 
 /**
  * InsertionResult is a snippet of data representing the result of a single Insertion, containing the

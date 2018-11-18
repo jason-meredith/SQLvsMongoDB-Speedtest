@@ -1,13 +1,13 @@
-package test.java.generators;
+package generators;
 
-import main.java.database.InsertionResult;
-import main.java.database.MongoDBConnector;
-import main.java.database.MySQLConnector;
-import main.java.generators.InsertionThread;
-import main.java.generators.SampleDataFactory;
-import main.java.generators.SampleDataGenerator;
-import main.java.sampledata.SampleDataLevelOne;
-import main.java.sampledata.SampleDataLevelTwo;
+import database.InsertionResult;
+import database.MongoDBConnector;
+import database.MySQLConnector;
+import generators.InsertionThread;
+import generators.SampleDataFactory;
+import generators.SampleDataGenerator;
+import sampledata.SampleDataLevelOne;
+import sampledata.SampleDataLevelTwo;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,10 +32,10 @@ import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 
-import main.java.database.MongoDBConnector;
-import main.java.database.MySQLConnector;
-import main.java.sampledata.SampleDataLevelOne;
-import main.java.sampledata.SampleDataLevelTwo;
+import database.MongoDBConnector;
+import database.MySQLConnector;
+import sampledata.SampleDataLevelOne;
+import sampledata.SampleDataLevelTwo;
 
 public class TestSampleDataGenerator {
 
@@ -72,7 +72,7 @@ public class TestSampleDataGenerator {
 
         // Add our InsertionThreads with their respective connectors
         generator.addInsertionThread(MYSQL, new MySQLConnector());
-        generator.addInsertionThread(MONGODB, new MongoDBConnector(database));
+        generator.addInsertionThread(MONGODB, new MongoDBConnector());
 
     }
 

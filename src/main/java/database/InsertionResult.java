@@ -1,6 +1,6 @@
-package main.java.database;
+package database;
 
-import main.java.sampledata.SampleData;
+import sampledata.SampleData;
 
 /**
  * InsertionResult is a snippet of data representing the result of a single Insertion, containing the
@@ -16,7 +16,7 @@ public class InsertionResult {
     /**
      * Total amount of time this insertion took
      */
-    private double insertionTime;
+    private long insertionTime;
 
     /**
      * Complexity of the data used to return this result
@@ -28,7 +28,7 @@ public class InsertionResult {
      */
     private SampleData sampleData;
 
-    public InsertionResult(String connectorName, double insertionTime, int complexity, SampleData sampleData) {
+    public InsertionResult(String connectorName, long insertionTime, int complexity, SampleData sampleData) {
         this.connectorName = connectorName;
         this.insertionTime = insertionTime;
         this.complexity = complexity;
@@ -39,7 +39,7 @@ public class InsertionResult {
         return connectorName;
     }
 
-    public double getInsertionTime() {
+    public long getInsertionTime() {
         return insertionTime;
     }
 

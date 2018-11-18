@@ -1,8 +1,8 @@
-package main.java.generators;
+package generators;
 
-import main.java.database.DatabaseConnector;
-import main.java.database.InsertionResult;
-import main.java.sampledata.SampleData;
+import database.DatabaseConnector;
+import database.InsertionResult;
+import sampledata.SampleData;
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;

@@ -1,8 +1,8 @@
-package main.java.generators;
+package generators;
 
 import java.util.ArrayList;
 
-import main.java.sampledata.SampleData;
+import sampledata.SampleData;
 
 /**
  * Factory object for generate Sample Data Objects.

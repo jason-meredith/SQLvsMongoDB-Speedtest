@@ -1,6 +1,6 @@
-package main.java.database;
+package database;
 
-import main.java.sampledata.SampleData;
+import sampledata.SampleData;
 
 public interface DatabaseConnector {
 

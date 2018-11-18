@@ -1,4 +1,4 @@
-package main.java.sampledata;
+package sampledata;
 
 import java.util.HashMap;
 

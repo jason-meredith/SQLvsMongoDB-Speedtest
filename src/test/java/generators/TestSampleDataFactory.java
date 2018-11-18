@@ -2,10 +2,10 @@ package test.java.generators;
 
 import org.junit.Test;
 
-import main.java.generators.SampleDataFactory;
-import main.java.sampledata.SampleData;
-import main.java.sampledata.SampleDataLevelOne;
-import main.java.sampledata.SampleDataLevelTwo;
+import generators.SampleDataFactory;
+import sampledata.SampleData;
+import sampledata.SampleDataLevelOne;
+import sampledata.SampleDataLevelTwo;
 
 import static junit.framework.TestCase.assertSame;
 

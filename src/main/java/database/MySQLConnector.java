@@ -1,8 +1,8 @@
-package main.java.database;
+package database;
 
 import java.util.Random;
 
-import main.java.sampledata.SampleData;
+import sampledata.SampleData;
 
 /**
  * Used to connect to a MongoDB database, insert a SampleData object query and
@@ -24,14 +24,9 @@ public class MySQLConnector implements DatabaseConnector {
 
         // Testing values
         // Generate example data until database connection is implemented
-        System.out.println("MySQL Connector: " + data.getInsertionStatements().get("mysql"));
-        double time = (rng.nextDouble()*500);
-        try {
-            Thread.sleep(Math.round(time));
-        } catch (Exception e) {
-            e.printStackTrace();;
-        }
+        //System.out.println("MySQL Connector: " + data.getInsertionStatements().get("mysql"));
 
-        return new InsertionResult("MySQL", time, 0, data);
+
+        return new InsertionResult("MySQL", 0, 0, data);
     }
 }

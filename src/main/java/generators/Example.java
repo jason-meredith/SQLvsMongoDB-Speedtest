@@ -2,7 +2,9 @@ package generators;
 
 import database.MongoDBConnector;
 import database.MySQLConnector;
+import sampledata.SampleData;
 import sampledata.SampleDataLevelOne;
+import sampledata.SampleDataLevelThree;
 import sampledata.SampleDataLevelTwo;
 
 
@@ -13,6 +15,7 @@ public class Example {
         // Add our data prototypes
         SampleDataFactory.addSampleDataObjectPrototype(SampleDataLevelOne.class);
         SampleDataFactory.addSampleDataObjectPrototype(SampleDataLevelTwo.class);
+        SampleDataFactory.addSampleDataObjectPrototype(SampleDataLevelThree.class);
 
 
         // Create our generator
@@ -20,9 +23,9 @@ public class Example {
 
         // Add our InsertionThreads with their respective connectors
         generator.addInsertionThread("mysql", new MySQLConnector());
-        generator.addInsertionThread("mongodb", new MongoDBConnector());
+        //generator.addInsertionThread("mongodb", new MongoDBConnector());
 
-        generator.setComplexity(2);
+        generator.setComplexity(3);
 
 
         // Start the generator

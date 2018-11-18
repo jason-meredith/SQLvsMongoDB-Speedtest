@@ -45,6 +45,9 @@ public class MongoDBConnector implements DatabaseConnector {
 
         String insertionStatement = data.getInsertionStatements().get("mongodb");
 
+        System.out.println("---");
+        System.out.println("MongoDB Connector: " + insertionStatement);
+
         Document insertionCmd = Document.parse(insertionStatement);
         System.out.println(insertionCmd.toString());
 
@@ -61,25 +64,5 @@ public class MongoDBConnector implements DatabaseConnector {
 //
         return new InsertionResult("MongoDB", endTime - startTime, 0, data);
     }
-    
-/*
-	// Insert an entry for a document
-	static Document insertDocument(MongoCollection<org.bson.Document> collection) {
-        int alpha = rng.nextInt();
-        int beta = rng.nextInt();
-        int gamma = rng.nextInt();
-        int delta = rng.nextInt();
-        int theta = rng.nextInt();
-        
-		Document document = new Document();
-		document.put("alpha", alpha);
-		document.put("beta", beta);
-		document.put("gamma", gamma);
-		document.put("delta", delta);
-		document.put("theta", theta);
-		collection.insertOne(document);
-		return document;
-	}*/
-	
 
 }

@@ -24,7 +24,9 @@ public class MySQLConnector implements DatabaseConnector {
 
         // Testing values
         // Generate example data until database connection is implemented
-        //System.out.println("MySQL Connector: " + data.getInsertionStatements().get("mysql"));
+        System.out.println("---");
+        System.out.println("MySQL Connector: " + data.getInsertionStatements().get("mysql"));
+        System.out.println("\n");
 
 
         return new InsertionResult("MySQL", 0, 0, data);

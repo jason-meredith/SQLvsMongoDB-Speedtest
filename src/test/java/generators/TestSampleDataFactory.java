@@ -1,4 +1,4 @@
-package test.java.generators;
+package generators;
 
 import org.junit.Test;
 

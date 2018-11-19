@@ -23,6 +23,9 @@ public class MongoDBConnector implements DatabaseConnector {
 
 	private MongoCollection<Document> collection;
 	
+	/**
+	 * Connect to mongodb
+	 */
     public MongoDBConnector () {
         try {
             MongoClient mongoClient = new MongoClient();

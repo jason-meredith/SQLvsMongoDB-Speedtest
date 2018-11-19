@@ -10,17 +10,22 @@ public class Title {
     private int identifier;
 
 
+    private static int id = 0;
+
+
     // Salaries
     private int ttl_empNum, ttl_title, ttl_fromDate, ttl_toDate;
 
     protected Title(int ttl_empNum) {
         Random rng = new Random();
 
+        this.identifier = id++;
+
         this.ttl_empNum = ttl_empNum;
 
-        this.ttl_title = rng.nextInt();
-        this.ttl_fromDate = rng.nextInt();
-        this.ttl_toDate = rng.nextInt();
+        this.ttl_title = rng.nextInt(500);
+        this.ttl_fromDate = rng.nextInt(500);
+        this.ttl_toDate = rng.nextInt(500);
 
     }
 

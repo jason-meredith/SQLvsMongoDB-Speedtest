@@ -61,7 +61,13 @@ public class SampleDataGenerator implements SampleDataGeneratorInterface {
         threadPool.execute(() -> {
             while (true) {
 
+
+
                 try {
+
+                    // Give it a moment to populate
+                    Thread.sleep(100);
+
                     // Take the next Sample Data Object from our Queue
                     SampleData nextDataObject = SampleDataGenerator.this.sampleData.take();
 

@@ -23,6 +23,10 @@ public class InsertionThread implements Runnable {
      */
     private boolean running;
 
+    private long startTime, runtime;
+
+    private int successfulInsertions;
+
     /**
      * The database connector used to insert our objects
      */
@@ -36,6 +40,7 @@ public class InsertionThread implements Runnable {
         this.running = false;
         this.connector = connector;
         this.results = new ArrayList<>();
+        this.successfulInsertions = 0;
 
     }
 
@@ -44,6 +49,8 @@ public class InsertionThread implements Runnable {
      */
     public void start() {
         this.running = true;
+        startTime = System.currentTimeMillis();
+        successfulInsertions = 0;
     }
 
     /**
@@ -51,6 +58,7 @@ public class InsertionThread implements Runnable {
      */
     public void stop() {
         this.running = false;
+        runtime = 0;
     }
 
     /**
@@ -62,6 +70,8 @@ public class InsertionThread implements Runnable {
                 try {
                     SampleData data = dataQueue.take();
                     InsertionResult insertionResult = connector.insert(data);
+                    successfulInsertions++;
+                    runtime = System.currentTimeMillis() - this.startTime;
                     results.add(insertionResult); /* <- returns an InsertionResult object (complexity/database/time) (*/
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -106,6 +116,21 @@ public class InsertionThread implements Runnable {
      */
     public ArrayList<InsertionResult> getResults() {
         return this.results;
+    }
+
+    public double getInsertionsPerSecond() {
+
+        if(runtime < 10) {
+            runtime = 1000;
+        }
+
+        double insertionsPerSecond = (double) (successfulInsertions + 1) / (runtime / 1000);
+
+        if(insertionsPerSecond < 0.5)
+            return 0;
+
+        return insertionsPerSecond;
+
     }
 
 

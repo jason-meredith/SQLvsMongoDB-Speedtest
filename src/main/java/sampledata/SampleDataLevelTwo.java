@@ -10,6 +10,8 @@ public class SampleDataLevelTwo implements SampleData {
 
     public static String tableName = "SampleDataLevelTwo";
 
+    private static int id = 0;
+
 
     private int alpha, beta, gamma, delta, theta;
 
@@ -17,28 +19,29 @@ public class SampleDataLevelTwo implements SampleData {
         Random rng = new Random();
 
 
-        alpha = rng.nextInt();
-        beta = rng.nextInt();
-        gamma = rng.nextInt();
-        delta = rng.nextInt();
-        theta = rng.nextInt();
+        alpha = rng.nextInt(500);
+        beta = rng.nextInt(500);
+        gamma = rng.nextInt(500);
+        delta = rng.nextInt(500);
+        theta = rng.nextInt(500);
 
-        identifier = rng.nextInt();
+        identifier = id++;
 
     }
+
 
 
     @Override
     public SampleData getClone() {
         SampleDataLevelTwo clone = new SampleDataLevelTwo();
 
+        clone.identifier = this.identifier;
         clone.alpha = this.alpha;
         clone.beta = this.beta;
         clone.gamma = this.gamma;
         clone.delta = this.delta;
         clone.theta = this.theta;
 
-        clone.identifier = this.identifier;
 
         return clone;
     }

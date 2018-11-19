@@ -9,19 +9,22 @@ public class Salary {
 
     private int identifier;
 
+    private static int id = 0;
+
+
     // Salaries
     private int sal_empNum, sal_salary, sal_fromDate, sal_toDate;
 
     protected Salary(int sal_empNum) {
         Random rng = new Random();
 
-        identifier = rng.nextInt();
+        identifier = id++;
 
         this.sal_empNum = sal_empNum;
 
-        this.sal_fromDate = rng.nextInt();
-        this.sal_toDate = rng.nextInt();
-        this.sal_salary = rng.nextInt();
+        this.sal_fromDate = rng.nextInt(500);
+        this.sal_toDate = rng.nextInt(500);
+        this.sal_salary = rng.nextInt(500);
 
     }
 

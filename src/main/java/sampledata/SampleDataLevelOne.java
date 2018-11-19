@@ -11,14 +11,16 @@ public class SampleDataLevelOne implements SampleData {
     public static String tableName = "SampleDataLevelOne";
 
 
+    private static int id = 0;
+
     private int randomNumber;
 
     public SampleDataLevelOne() {
         Random rng = new Random();
 
-        randomNumber = rng.nextInt();
+        randomNumber = rng.nextInt(500);
 
-        identifier = rng.nextInt();
+        identifier = id++;
 
     }
 
@@ -27,8 +29,8 @@ public class SampleDataLevelOne implements SampleData {
     public SampleData getClone() {
         SampleDataLevelOne clone = new SampleDataLevelOne();
 
-        clone.randomNumber = this.randomNumber;
         clone.identifier = this.identifier;
+        clone.randomNumber = this.randomNumber;
 
         return clone;
     }
@@ -44,10 +46,13 @@ public class SampleDataLevelOne implements SampleData {
 
 
         String sqlStatement = "INSERT INTO " + tableName + " VALUES("
+                + String.valueOf(identifier) + ", "
                 + String.valueOf(randomNumber) + "); ";
 
-        String mongoStatement = "{"
-                + "_id:" + String.valueOf(getIdentifier()) + ", ";
+        String mongoStatement = "{ insert: \"" + tableName + "\", "
+                + "documents: [ { "
+                    + "_id: " + String.valueOf(getIdentifier()) + ", "
+                    + "randomNumber: " + String.valueOf(this.randomNumber) + " } ] }";
 
 
         insertStatements.put("mysql", sqlStatement);

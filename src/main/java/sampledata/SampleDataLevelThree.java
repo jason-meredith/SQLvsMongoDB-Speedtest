@@ -21,27 +21,30 @@ public class SampleDataLevelThree implements SampleData {
     private ArrayList<Title> titles;
 
 
+    private static int id = 0;
+
+
     public SampleDataLevelThree() {
         Random rng = new Random();
 
-        identifier = rng.nextInt();
+        identifier = id++;
 
-        emp_birthDate = rng.nextInt();
-        emp_fname = rng.nextInt();
-        emp_lname = rng.nextInt();
-        emp_gender = rng.nextInt();
-        emp_hireDate = rng.nextInt();
+        emp_birthDate = rng.nextInt(500);
+        emp_fname = rng.nextInt(500);
+        emp_lname = rng.nextInt(500);
+        emp_gender = rng.nextInt(500);
+        emp_hireDate = rng.nextInt(500);
 
         salaries = new ArrayList<>();
         titles = new ArrayList<>();
 
-        // Add a random number of salaries between 2 and 12
-        for(int i = 0; i < Math.abs(rng.nextInt() % 10) + 2; i++) {
+        // Add a random number of salaries between 5 and 15
+        for(int i = 0; i < Math.abs(rng.nextInt() % 10) + 5; i++) {
             salaries.add(new Salary(identifier));
         }
 
-        // Add a random number of titles between 2 and 12
-        for(int i = 0; i < Math.abs(rng.nextInt() % 10) + 2; i++) {
+        // Add a random number of titles between 5 and 15
+        for(int i = 0; i < Math.abs(rng.nextInt() % 10) + 5; i++) {
             titles.add(new Title(identifier));
         }
 
@@ -53,6 +56,7 @@ public class SampleDataLevelThree implements SampleData {
     public SampleData getClone() {
         SampleDataLevelThree clone = new SampleDataLevelThree();
 
+        clone.identifier = this.identifier;
         clone.emp_birthDate = this.emp_birthDate;
         clone.emp_fname = this.emp_fname;
         clone.emp_lname = this.emp_lname;
@@ -61,8 +65,6 @@ public class SampleDataLevelThree implements SampleData {
 
         clone.salaries = this.salaries;
         clone.titles = this.titles;
-
-        clone.identifier = this.identifier;
 
         return clone;
     }
@@ -76,7 +78,7 @@ public class SampleDataLevelThree implements SampleData {
     public HashMap<String, String> getInsertionStatements() {
         HashMap<String, String> insertStatements = new HashMap<>();
 
-        String sqlStatement = "INSERT INTO " + tableName + " VALUES("
+        String sqlStatement = "INSERT INTO " + tableName + " VALUES ("
                 + String.valueOf(getIdentifier()) + ", "
                 + String.valueOf(this.emp_birthDate) + ", "
                 + String.valueOf(this.emp_fname) + ", "
